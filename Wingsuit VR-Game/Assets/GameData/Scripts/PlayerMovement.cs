@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,18 +10,22 @@ public class PlayerMovement : MonoBehaviour
 
     Transform cam;
 
-
     private void Start()
     {
-        cam = transform.Find("Main Camera"); 
+        cam = transform.Find("Main Camera");
     }
 
     private void Update()
     {
-        transform.position += transform.forward * movementSpeed * Time.deltaTime;
+        // move the player forward
+        transform.position += cam.transform.forward * movementSpeed * Time.deltaTime;
 
 
-        transform.rotation = cam.transform.rotation;
+        // limit the movement space
+        float x = Mathf.Clamp(transform.localPosition.x, minContraints.x, maxContraints.x);
+        float y = Mathf.Clamp(transform.localPosition.y, minContraints.y, maxContraints.y);
+        transform.localPosition = new Vector3(x, y, transform.localPosition.z);
+
     }
 
 }

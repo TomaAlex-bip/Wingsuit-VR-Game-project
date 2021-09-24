@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "c5e6bf0c",
         "name": "com.DefaultCompany.WingsuitVRGame",
-        "processId": 18374,
+        "processId": 22463,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,42 @@
             "deviceId": "c5e6bf0c",
             "name": "com.DefaultCompany.WingsuitVRGame",
             "processId": 18374,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 8721,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 9091,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 9989,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 10524,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 10783,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 22463,
             "exited": false
         }
     ],
