@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EndlessMapGenerator : MonoBehaviour
 {
+    public static EndlessMapGenerator Instance { get; private set; }
+
+
     [SerializeField] private Transform player;
 
     [SerializeField] private int chunksVisibileInFront;
@@ -13,10 +16,8 @@ public class EndlessMapGenerator : MonoBehaviour
 
     [SerializeField] private int chunkStartOffset;
     [SerializeField] private float chunkSize;
-    [SerializeField] private GameObject[] chunks;
+    [SerializeField] private ChunkGenerator chunkGenerator;
 
-
-    //List<GameObject> visibleChunks = new List<GameObject>();
 
     Dictionary<int, GameObject> visibleChunks = new Dictionary<int, GameObject>();
 
@@ -24,19 +25,29 @@ public class EndlessMapGenerator : MonoBehaviour
     float oldPlayerPositionZ;
 
 
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private void Start()
     {
-        oldPlayerPositionZ = player.position.z;
+        oldPlayerPositionZ = player.localPosition.z;
         UpdateChunks();
-        for (int i = 0; i < chunkStartOffset; i++)
-        {
-            visibleChunks[i] = null;
-        }
+        
     }
 
     private void Update()
     {
-        playerPositionZ = player.position.z;
+        playerPositionZ = player.localPosition.z;
 
         if (playerPositionZ - oldPlayerPositionZ > minMoveDistanceThreshold)
         {
@@ -60,7 +71,9 @@ public class EndlessMapGenerator : MonoBehaviour
 
             if(!visibleChunks.ContainsKey(inRangeChunkCoord) && inRangeChunkCoord >= chunkStartOffset)
             {
-                var instChunk = Instantiate(chunks[0], new Vector3(0f, 0f, inRangeChunkCoord * chunkSize), Quaternion.identity);
+                var chunkToSpawn = chunkGenerator.GenerateChunk(inRangeChunkCoord);
+                var instChunk = Instantiate(chunkToSpawn, transform);
+                instChunk.transform.localPosition = new Vector3(0f, 0f, inRangeChunkCoord * chunkSize);
                 visibleChunks[inRangeChunkCoord] = instChunk;
             }
 
