@@ -496,7 +496,7 @@ MonoBehaviour:
   chunksVisibleBack: 0
   minMoveDistanceThreshold: 10
   chunkStartOffset: 1
-  chunkSize: 30
+  chunkSize: 20
   chunkGenerator:
     noiseCurve:
       serializedVersion: 2
@@ -516,6 +516,7 @@ MonoBehaviour:
     noiseSettings:
       scale: 27.7
       amplitude: 3
+      randomSeed: 1
       seed: 0
     biomes:
     - chunks:
@@ -527,14 +528,13 @@ MonoBehaviour:
     - chunks:
       - {fileID: 5924135610357840197, guid: 68ecd5cf3e6d58a4481b961a57ab0460, type: 3}
       - {fileID: 5924135610357840197, guid: 1de1265664c77c64d9f7a0db758284e2, type: 3}
-      - {fileID: 5924135610357840197, guid: c4d98e7d96f71ab4f945611ca5a5bda7, type: 3}
-      minValue: 0.34
+      minValue: 0.33
       maxValue: 0.66
     - chunks:
       - {fileID: 5924135610357840197, guid: c78584e50b22e8c48b496771c1ac94df, type: 3}
       - {fileID: 5924135610357840197, guid: 06850891a39497340bbcdfc0805ed6d9, type: 3}
       - {fileID: 5924135610357840197, guid: 4a852760c85b33e4a895fc048ac218e9, type: 3}
-      minValue: 0.67
+      minValue: 0.66
       maxValue: 1
 --- !u!1 &2088217246
 GameObject:

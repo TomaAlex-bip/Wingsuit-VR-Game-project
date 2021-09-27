@@ -6,9 +6,8 @@ public static class Noise
 {
     public static float GenerateNoiseValue(NoiseSettings noiseSettings, int sampleCentre)
     {
-
         System.Random prng = new System.Random(noiseSettings.seed);
-        float offset = prng.Next(-100000, 100000);
+        float offset = prng.Next(-10000, 10000);
 
         float sampleX = sampleCentre / noiseSettings.scale + offset;
 
@@ -28,13 +27,14 @@ public class NoiseSettings
     public float scale;
     public float amplitude;
 
+    public bool randomSeed;
     public int seed;
 
-    public void ValidataValues()
+    public void ValidateValues()
     {
         if(scale <= 0.01f)
         {
-            scale = 0.0f;
+            scale = 0.01f;
         }
     }
 }

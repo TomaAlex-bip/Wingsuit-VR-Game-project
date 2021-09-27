@@ -42,6 +42,11 @@ public class EndlessMapGenerator : MonoBehaviour
     {
         oldPlayerPositionZ = player.localPosition.z;
         UpdateChunks();
+
+        if(chunkGenerator.NoiseSettings.randomSeed)
+        {
+            chunkGenerator.NoiseSettings.seed = Random.Range(int.MinValue, int.MaxValue);
+        }
         
     }
 
@@ -101,4 +106,12 @@ public class EndlessMapGenerator : MonoBehaviour
         leftBehindChunksKeys.Clear();
 
     }
+
+
+    private void OnValidate()
+    {
+        chunkGenerator.ValidateValues();
+    }
+
+
 }

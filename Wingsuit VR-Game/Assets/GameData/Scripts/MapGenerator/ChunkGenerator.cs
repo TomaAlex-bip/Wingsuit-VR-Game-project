@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class ChunkGenerator
 {
+
+    public NoiseSettings NoiseSettings { get => noiseSettings; }
+
     [SerializeField] private AnimationCurve noiseCurve;
 
     [SerializeField] private AnimationCurve biomeCurve;
@@ -72,6 +75,10 @@ public class ChunkGenerator
     }
 
 
+    public void ValidateValues()
+    {
+        noiseSettings.ValidateValues();
+    }
 
 
 
