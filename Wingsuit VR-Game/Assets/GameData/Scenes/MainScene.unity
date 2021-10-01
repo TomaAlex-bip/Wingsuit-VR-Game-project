@@ -399,15 +399,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 664136953}
     m_Modifications:
-    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
-        type: 3}
-      propertyPath: maxRotation
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
-        type: 3}
-      propertyPath: limitRotation
-      value: 1
+    - target: {fileID: 633006889, guid: 4922a33ac161a9d40af3a0bf67bcebc0, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
@@ -416,33 +410,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
-      propertyPath: maxContraints.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
-        type: 3}
-      propertyPath: maxContraints.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
-        type: 3}
-      propertyPath: minContraints.x
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
-        type: 3}
       propertyPath: minContraints.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8263386099382518087, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8263386099382518087, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8263386099382518087, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
@@ -546,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 225563357}
   chunksVisibileInFront: 3
-  chunksVisibleBack: 0
+  chunksVisibleBack: 1
   minMoveDistanceThreshold: 10
   chunkStartOffset: 1
   chunkSize: 20
@@ -577,17 +551,6 @@ MonoBehaviour:
       - {fileID: 5924135610357840197, guid: b05f98dbee34d1d45bd22801898ab525, type: 3}
       - {fileID: 5924135610357840197, guid: ff6386f0613a28545852fc0f53c73191, type: 3}
       minValue: 0
-      maxValue: 0.33
-    - chunks:
-      - {fileID: 5924135610357840197, guid: 68ecd5cf3e6d58a4481b961a57ab0460, type: 3}
-      - {fileID: 5924135610357840197, guid: 1de1265664c77c64d9f7a0db758284e2, type: 3}
-      minValue: 0.33
-      maxValue: 0.66
-    - chunks:
-      - {fileID: 5924135610357840197, guid: c78584e50b22e8c48b496771c1ac94df, type: 3}
-      - {fileID: 5924135610357840197, guid: 06850891a39497340bbcdfc0805ed6d9, type: 3}
-      - {fileID: 5924135610357840197, guid: 4a852760c85b33e4a895fc048ac218e9, type: 3}
-      minValue: 0.66
       maxValue: 1
 --- !u!1 &2088217246
 GameObject:

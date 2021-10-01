@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
 
     [SerializeField] private float movementSpeed;
 
@@ -11,18 +12,35 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool limitRotation;
     [SerializeField] private float maxRotation;
 
+    PlayerBehaviour playerBehaviour;
 
+    float speed;
     Transform cam;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     private void Start()
     {
         cam = transform.Find("Main Camera");
+        speed = movementSpeed;
+        playerBehaviour = PlayerBehaviour.Instance;
     }
 
     private void Update()
     {
         // move the player forward
-        transform.position += cam.transform.forward * movementSpeed * Time.deltaTime;
+        transform.position += cam.transform.forward * speed * Time.deltaTime;
 
 
         // limit the movement space
@@ -32,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         // limit the rotation
-
         float processedRotationX = cam.localRotation.eulerAngles.x;
         float processedRotationY = cam.localRotation.eulerAngles.y;
         if (cam.localRotation.eulerAngles.x >= 180f)
@@ -48,10 +65,36 @@ public class PlayerMovement : MonoBehaviour
         float rotY = Mathf.Clamp(processedRotationY, -maxRotation, maxRotation);
         Quaternion rot = Quaternion.Euler(rotX, rotY, cam.transform.localRotation.eulerAngles.z);
 
+
         if(limitRotation)
         {
-            cam.transform.localRotation = rot;
+            if (rotX <= -maxRotation || rotX >= maxRotation || rotY <= -maxRotation || rotY >= maxRotation)
+            {
+                // deal with the state where you look back
+                GameOverState();
+            }
+            else
+            {
+                // keep things normal
+                //ContinueState();
+            }
+
+
+            //cam.transform.localRotation = rot;
         }
     }
+
+
+    public void GameOverState()
+    {
+        speed = 0f;
+        playerBehaviour.GameOverState();
+    }
+
+    private void ContinueState()
+    {
+        speed = movementSpeed;
+    }
+
 
 }
