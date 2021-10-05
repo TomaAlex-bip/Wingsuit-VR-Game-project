@@ -7,9 +7,15 @@ public class PlayerBehaviour : MonoBehaviour
     
     public static PlayerBehaviour Instance { get; private set; }
 
+    public bool FinishedJumpAnimation { get; private set; }
+
+
+    GameManager gameManager;
+
     Rigidbody rb;
 
     bool gameOver;
+
 
     private void Awake()
     {
@@ -27,6 +33,8 @@ public class PlayerBehaviour : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+
+        gameManager = GameManager.Instance;
     }
 
 
@@ -45,7 +53,8 @@ public class PlayerBehaviour : MonoBehaviour
             rb.mass = 10f;
 
             rb.AddForce(transform.forward * 5000f);
-            
+
+            gameManager.RestartGame(3f);
             
         }
     }
@@ -58,6 +67,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
     }
+
+
 
 
 

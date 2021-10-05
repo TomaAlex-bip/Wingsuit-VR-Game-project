@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6776674640896801874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8263386099382518087}
   m_RootOrder: 1
@@ -124,16 +124,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8263386099382518088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb23f375e70ef94fb828ebeba65db87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 20
-  minContraints: {x: -5, y: 1}
-  maxContraints: {x: 5, y: 10}
+  minContraints: {x: -5, y: -6}
+  maxContraints: {x: 5, y: 5}
   limitRotation: 1
   maxRotation: 60
+  rotX: 0
+  rotY: 0
 --- !u!114 &3347112688461199100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +159,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &555070358960638850
 Rigidbody:
@@ -189,6 +191,7 @@ GameObject:
   - component: {fileID: 8263386099399873250}
   - component: {fileID: 129664731003836486}
   - component: {fileID: 6380134542939691624}
+  - component: {fileID: 263501120324877503}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -301,3 +304,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 200
   smoothFactor: 0.2
+--- !u!114 &263501120324877503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263386099399873252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8311ded43ed3e4e9926e147ebd77ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 32

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,10 +13,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool limitRotation;
     [SerializeField] private float maxRotation;
 
+    [SerializeField] private float rotX;
+    [SerializeField] private float rotY;
+
     PlayerBehaviour playerBehaviour;
+    GameManager gameManager;
 
     float speed;
     Transform cam;
+
+    bool inSettings = false;
 
     private void Awake()
     {
@@ -35,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         cam = transform.Find("Main Camera");
         speed = movementSpeed;
         playerBehaviour = PlayerBehaviour.Instance;
+        gameManager = GameManager.Instance;
     }
 
     private void Update()
@@ -50,33 +58,41 @@ public class PlayerMovement : MonoBehaviour
 
 
         // limit the rotation
-        float processedRotationX = cam.localRotation.eulerAngles.x;
-        float processedRotationY = cam.localRotation.eulerAngles.y;
+        rotX = cam.localRotation.eulerAngles.x;
+        rotY = cam.localRotation.eulerAngles.y;
         if (cam.localRotation.eulerAngles.x >= 180f)
         {
-            processedRotationX = cam.localRotation.eulerAngles.x - 360f;
+            rotX = cam.localRotation.eulerAngles.x - 360f;
         }
         if(cam.localRotation.eulerAngles.y >= 180f)
         {
-            processedRotationY = cam.localRotation.eulerAngles.y - 360f;
+            rotY = cam.localRotation.eulerAngles.y - 360f;
         }
 
-        float rotX = Mathf.Clamp(processedRotationX, -maxRotation, maxRotation);
-        float rotY = Mathf.Clamp(processedRotationY, -maxRotation, maxRotation);
-        Quaternion rot = Quaternion.Euler(rotX, rotY, cam.transform.localRotation.eulerAngles.z);
+        // useless, nu poate sa limiteze rotatia
+        //float rotX = Mathf.Clamp(processedRotationX, -maxRotation, maxRotation);
+        //float rotY = Mathf.Clamp(processedRotationY, -maxRotation, maxRotation);
+        //Quaternion rot = Quaternion.Euler(rotX, rotY, cam.transform.localRotation.eulerAngles.z);
 
 
         if(limitRotation)
         {
-            if (rotX <= -maxRotation || rotX >= maxRotation || rotY <= -maxRotation || rotY >= maxRotation)
+            if (rotX <= -maxRotation || rotY <= -maxRotation || rotY >= maxRotation)
             {
                 // deal with the state where you look back
-                GameOverState();
+                if(!inSettings)
+                {
+                    GameOverState();
+                }
+            }
+            else if (rotX >= maxRotation)
+            {
+                SettingsState();
             }
             else
             {
                 // keep things normal
-                //ContinueState();
+                ContinueState();
             }
 
 
@@ -84,15 +100,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void SettingsState()
+    {
+        inSettings = true;
+        speed = 0f;
+
+        var restart = gameManager.UI.restartButton;
+        restart.SetActive(true);
+        restart.transform.position = new Vector3(transform.position.x, transform.position.y - 0.49f, transform.position.z- 0.25f);
+        var rot = Quaternion.Euler(110f, restart.transform.rotation.y, restart.transform.rotation.z);
+        restart.transform.rotation = rot;
+    }
 
     public void GameOverState()
     {
-        speed = 0f;
+        var playerMovement = gameObject.GetComponent<PlayerMovement>();
+        //speed = 0f;
         playerBehaviour.GameOverState();
+        playerMovement.enabled = false;
     }
 
     private void ContinueState()
     {
+        inSettings = false;
+        var restart = gameManager.UI.restartButton;
+        restart.SetActive(false);
         speed = movementSpeed;
     }
 
