@@ -425,6 +425,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 967612083}
     m_Modifications:
+    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
+        type: 3}
+      propertyPath: maxContraints.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
+        type: 3}
+      propertyPath: minContraints.x
+      value: -4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8263386099382518087, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
       propertyPath: m_RootOrder
@@ -834,9 +844,12 @@ MonoBehaviour:
       seed: 0
     biomes:
     - chunks:
+      - {fileID: 5924135610357840197, guid: ff6386f0613a28545852fc0f53c73191, type: 3}
       - {fileID: 5924135610357840197, guid: 3bfc6f7cbe65a21498dc1a416599dc09, type: 3}
       - {fileID: 5924135610357840197, guid: b05f98dbee34d1d45bd22801898ab525, type: 3}
-      - {fileID: 5924135610357840197, guid: ff6386f0613a28545852fc0f53c73191, type: 3}
+      - {fileID: 5924135610357840197, guid: ca44a8325cc67c04da11430168561cbc, type: 3}
+      - {fileID: 5924135610357840197, guid: 9707385467ccb744baba1209be1a11ea, type: 3}
+      - {fileID: 5924135610357840197, guid: 8980cc5061cac6343885fb57fa1b8f68, type: 3}
       minValue: 0
       maxValue: 1
 --- !u!1 &2088217246
