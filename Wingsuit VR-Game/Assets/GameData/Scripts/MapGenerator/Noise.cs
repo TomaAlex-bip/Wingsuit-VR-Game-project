@@ -15,7 +15,7 @@ public static class Noise
 
         noiseValue = Mathf.InverseLerp(-1, 1, noiseValue);
 
-        Debug.Log("sampleCentre: " + sampleCentre + " | sampleX: " + sampleX + " | noiseValue: " + noiseValue);
+        //Debug.Log("sampleCentre: " + sampleCentre + " | sampleX: " + sampleX + " | noiseValue: " + noiseValue);
         return noiseValue;
     }
 }

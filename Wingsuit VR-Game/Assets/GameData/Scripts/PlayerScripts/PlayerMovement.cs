@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotX;
     [SerializeField] private float rotY;
 
-    PlayerBehaviour playerBehaviour;
-    GameManager gameManager;
+    private PlayerBehaviour playerBehaviour;
+    private GameManager gameManager;
 
-    float speed;
-    Transform cam;
+    private float speed;
+    private Transform cam;
 
-    bool inSettings = false;
+    private bool inSettings = false;
 
     private void Awake()
     {
@@ -48,18 +48,23 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // move the player forward
-        transform.position += cam.transform.forward * speed * Time.deltaTime;
+        var playerTransform = transform;
+        playerTransform.position += cam.transform.forward * speed * Time.deltaTime;
 
 
         // limit the movement space
-        float x = Mathf.Clamp(transform.localPosition.x, minContraints.x, maxContraints.x);
-        float y = Mathf.Clamp(transform.localPosition.y, minContraints.y, maxContraints.y);
-        transform.localPosition = new Vector3(x, y, transform.localPosition.z);
+        var localPosition = playerTransform.localPosition;
+        var x = Mathf.Clamp(localPosition.x, minContraints.x, maxContraints.x);
+        var y = Mathf.Clamp(localPosition.y, minContraints.y, maxContraints.y);
+        
+            
+        transform.localPosition = new Vector3(x, y, localPosition.z);
 
 
         // limit the rotation
-        rotX = cam.localRotation.eulerAngles.x;
-        rotY = cam.localRotation.eulerAngles.y;
+        var localRotation = cam.localRotation;
+        rotX = localRotation.eulerAngles.x;
+        rotY = localRotation.eulerAngles.y;
         if (cam.localRotation.eulerAngles.x >= 180f)
         {
             rotX = cam.localRotation.eulerAngles.x - 360f;
@@ -69,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             rotY = cam.localRotation.eulerAngles.y - 360f;
         }
 
-        // useless, nu poate sa limiteze rotatia
+        // useless, nu poate sa limiteze rotatia in modul VR
         //float rotX = Mathf.Clamp(processedRotationX, -maxRotation, maxRotation);
         //float rotY = Mathf.Clamp(processedRotationY, -maxRotation, maxRotation);
         //Quaternion rot = Quaternion.Euler(rotX, rotY, cam.transform.localRotation.eulerAngles.z);
@@ -107,8 +112,12 @@ public class PlayerMovement : MonoBehaviour
 
         var restart = gameManager.UI.restartButton;
         restart.SetActive(true);
-        restart.transform.position = new Vector3(transform.position.x, transform.position.y - 0.49f, transform.position.z- 0.25f);
-        var rot = Quaternion.Euler(110f, restart.transform.rotation.y, restart.transform.rotation.z);
+        
+        var playerTransform = transform.position;
+        restart.transform.position = new Vector3(playerTransform.x, playerTransform.y - 0.49f, playerTransform.z - 0.25f);
+
+        var restartRotation = restart.transform.rotation;
+        var rot = Quaternion.Euler(110f, restartRotation.y, restartRotation.z);
         restart.transform.rotation = rot;
     }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Play
   - Restart
+  - ScorePoint
   layers:
   - Default
   - TransparentFX

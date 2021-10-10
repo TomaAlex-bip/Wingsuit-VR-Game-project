@@ -8,20 +8,20 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private LayerMask layer;
 
     [SerializeField] private float timeToActivate = 2f;
-    [SerializeField] private Transform gazeCrosshair;
+    [SerializeField] private Image gazeCrosshair;
     [SerializeField] private float size;
     [SerializeField] private Vector3 size2;
 
-    GameManager gameManager;
-
-    float initialSize;
-    bool gazeStatus;
-    float gazeTimer;
+    private GameManager gameManager;
+    
+    private float initialSize;
+    private bool gazeStatus;
+    private float gazeTimer;
 
     private void Start()
     {
         gameManager = GameManager.Instance;
-        initialSize = gazeCrosshair.localScale.x;
+        initialSize = gazeCrosshair.transform.localScale.x;
     }
 
     private void Update()
@@ -52,16 +52,16 @@ public class PlayerInteractions : MonoBehaviour
             size = 1f;
         }
 
-        gazeCrosshair.localScale = Vector3.one * size * initialSize;
+        gazeCrosshair.transform.localScale = Vector3.one * size * initialSize;
         size2 = Vector3.one * size;
     }
 
-    public void GazeOn()
+    private void GazeOn()
     {
         gazeStatus = true;
     }
 
-    public void GazeOff()
+    private void GazeOff()
     {
         gazeStatus = false;
         gazeTimer = 0f;

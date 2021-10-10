@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject player;
 
-    
+    [SerializeField] private Text scoreText;
 
-    Animator playerAnim;
+
+    private int score = 0;
+
+    private Animator playerAnim;
 
     private void Awake()
     {
@@ -53,6 +57,12 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartGameCoroutine());
             Destroy(ui.playButton);
         }
+    }
+
+    public void AddScore()
+    {
+        score++;
+        scoreText.text = "Score: " + score;
     }
 
     public void RestartGame() => SceneManager.LoadScene(0);

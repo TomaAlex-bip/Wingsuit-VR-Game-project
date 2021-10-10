@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,14 @@ public class PlayerBehaviour : MonoBehaviour
     
     public static PlayerBehaviour Instance { get; private set; }
 
-    public bool FinishedJumpAnimation { get; private set; }
+    
 
 
-    GameManager gameManager;
+    private GameManager gameManager;
 
-    Rigidbody rb;
+    private Rigidbody rb;
 
-    bool gameOver;
+    private bool gameOver;
 
 
     private void Awake()
@@ -43,33 +44,47 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void GameOverState()
     {
-        if(!gameOver)
+        if (gameOver)
         {
-            gameOver = true;
-
-            rb.useGravity = true;
-
-            rb.drag = 0.5f;
-            rb.mass = 10f;
-
-            rb.AddForce(transform.forward * 5000f);
-
-            gameManager.RestartGame(3f);
-            
+            return;
         }
+        
+        gameOver = true;
+
+        rb.useGravity = true;
+
+        rb.drag = 0.5f;
+        rb.mass = 10f;
+
+        rb.AddForce(transform.forward * 5000f);
+
+        gameManager.RestartGame(3f);
+        
+    
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Respawn"))
+        switch (collision.collider.tag)
         {
-            PlayerMovement.Instance.GameOverState();
-
+            case "Respawn":
+                PlayerMovement.Instance.GameOverState();
+                break;
+            
+            
         }
+        
     }
 
-
-
-
-
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "ScorePoint":
+                //print("am adaugat la scor");
+                gameManager.AddScore();
+                Destroy(other.transform.parent.gameObject);
+                break;
+        }
+    }
 }

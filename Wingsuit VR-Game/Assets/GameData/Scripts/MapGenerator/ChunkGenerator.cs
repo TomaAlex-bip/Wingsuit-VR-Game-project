@@ -6,7 +6,7 @@ using UnityEngine;
 public class ChunkGenerator
 {
 
-    public NoiseSettings NoiseSettings { get => noiseSettings; }
+    public NoiseSettings NoiseSettings => noiseSettings;
 
     [SerializeField] private AnimationCurve noiseCurve;
 
@@ -26,22 +26,22 @@ public class ChunkGenerator
 
         int chunkIndex = GenerateChunkIndex(biomeIndex);
 
-        Debug.Log("biomeIndex: " + biomeIndex + " | chunkIndex: " + chunkIndex);
+        //Debug.Log("biomeIndex: " + biomeIndex + " | chunkIndex: " + chunkIndex);
 
         var chunk = biomes[biomeIndex].chunks[chunkIndex];
 
         biomeCurve.AddKey(position, biomeIndex);
-        if (biomeIndex == 0)
+        switch (biomeIndex)
         {
-            redBiomes++;
-        }
-        if (biomeIndex == 1)
-        {
-            greenBiomes++;
-        }
-        if (biomeIndex == 2)
-        {
-            blueBiomes++;
+            case 0:
+                redBiomes++;
+                break;
+            case 1:
+                greenBiomes++;
+                break;
+            case 2:
+                blueBiomes++;
+                break;
         }
 
         return chunk;

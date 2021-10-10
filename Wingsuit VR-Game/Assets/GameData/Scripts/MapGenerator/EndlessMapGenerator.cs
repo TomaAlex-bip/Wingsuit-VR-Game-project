@@ -9,6 +9,10 @@ public class EndlessMapGenerator : MonoBehaviour
 
     [SerializeField] private Transform player;
 
+    [SerializeField] private GameObject scorePoint;
+    [Range(0f, 1f)]
+    [SerializeField] private float spawnChance;
+
     [SerializeField] private int chunksVisibileInFront;
     [SerializeField] private int chunksVisibleBack;
 
@@ -80,6 +84,26 @@ public class EndlessMapGenerator : MonoBehaviour
                 var instChunk = Instantiate(chunkToSpawn, transform);
                 instChunk.transform.localPosition = new Vector3(0f, 0f, inRangeChunkCoord * chunkSize);
                 visibleChunks[inRangeChunkCoord] = instChunk;
+
+                var spawnPointsTransform = instChunk.transform.Find("SpawnPointsForScorePoints");
+                if (spawnPointsTransform != null)
+                {
+                    var spawnPoints = spawnPointsTransform.GetComponentsInChildren<Transform>();
+                    foreach (var point in spawnPoints)
+                    {
+                        var rng = Random.Range(0f, 1f);
+                        if (rng <= spawnChance)
+                        {
+                            Instantiate(scorePoint, point.transform.position, Quaternion.identity);
+                        }
+                    }
+                }
+                else
+                {
+                    //Debug.LogError("Spawn Point for points not found!");
+                }
+
+
             }
 
         }
