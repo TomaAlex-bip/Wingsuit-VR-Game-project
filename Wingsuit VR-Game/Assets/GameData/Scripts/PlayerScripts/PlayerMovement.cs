@@ -20,7 +20,11 @@ public class PlayerMovement : MonoBehaviour
     private GameManager gameManager;
 
     private float speed;
+    private float speedMultiplier = 1f;
     private Transform cam;
+
+    private Camera mainCam;
+    private float initialFOV;
 
     private bool inSettings = false;
 
@@ -43,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
         speed = movementSpeed;
         playerBehaviour = PlayerBehaviour.Instance;
         gameManager = GameManager.Instance;
+        
+        mainCam = cam.GetComponent<Camera>();
+        initialFOV = mainCam.fieldOfView;
+
     }
 
     private void Update()
@@ -56,8 +64,10 @@ public class PlayerMovement : MonoBehaviour
         var localPosition = playerTransform.localPosition;
         var x = Mathf.Clamp(localPosition.x, minContraints.x, maxContraints.x);
         var y = Mathf.Clamp(localPosition.y, minContraints.y, maxContraints.y);
+
         
-            
+        
+        
         transform.localPosition = new Vector3(x, y, localPosition.z);
 
 
@@ -134,7 +144,11 @@ public class PlayerMovement : MonoBehaviour
         inSettings = false;
         var restart = gameManager.UI.restartButton;
         restart.SetActive(false);
-        speed = movementSpeed;
+        speedMultiplier = 1f + rotX / 100f;
+        speed = movementSpeed * speedMultiplier;
+
+        mainCam.fieldOfView = initialFOV * speedMultiplier;
+
     }
 
 

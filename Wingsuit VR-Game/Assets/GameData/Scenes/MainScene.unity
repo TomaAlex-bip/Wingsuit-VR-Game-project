@@ -726,6 +726,11 @@ PrefabInstance:
       propertyPath: gazeCrosshair
       value: 
       objectReference: {fileID: 271380884}
+    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4226241742371064639, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -814,7 +819,7 @@ PrefabInstance:
     - target: {fileID: 8263386099399873279, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
       propertyPath: field of view
-      value: 70
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 8352544665374165066, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
