@@ -732,6 +732,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2528355902161998749, guid: 46364c9c6d4c0554c84956f75a0d71eb,
         type: 3}
+    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
+        type: 3}
+      propertyPath: maxContraints.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3688078625594650942, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
+        type: 3}
+      propertyPath: minContraints.y
+      value: -5.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8263386099382518087, guid: 4922a33ac161a9d40af3a0bf67bcebc0,
         type: 3}
       propertyPath: m_RootOrder
@@ -1225,7 +1235,7 @@ MonoBehaviour:
   scorePoint: {fileID: 2675857451108645880, guid: b3f887311d357c6408d268a83ecc6872,
     type: 3}
   spawnChance: 0.3
-  chunksVisibileInFront: 3
+  chunksVisibileInFront: 5
   chunksVisibleBack: 1
   minMoveDistanceThreshold: 10
   chunkStartOffset: 2
