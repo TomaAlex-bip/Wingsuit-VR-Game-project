@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     
     public static PlayerBehaviour Instance { get; private set; }
 
-    
+    [SerializeField] private GameObject scoreParticle;
 
 
     private GameManager gameManager;
@@ -83,6 +83,7 @@ public class PlayerBehaviour : MonoBehaviour
             case "ScorePoint":
                 //print("am adaugat la scor");
                 gameManager.AddScore();
+                Instantiate(scoreParticle, other.transform.position, Quaternion.identity);
                 Destroy(other.transform.parent.gameObject);
                 break;
         }

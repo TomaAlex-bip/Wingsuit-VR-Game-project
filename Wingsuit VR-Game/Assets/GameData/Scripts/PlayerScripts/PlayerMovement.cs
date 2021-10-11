@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         inSettings = false;
         var restart = gameManager.UI.restartButton;
         restart.SetActive(false);
-        speedMultiplier = 1f + rotX / 100f;
+        speedMultiplier = 1f + (rotX/2f) / 100f;
         speed = movementSpeed * speedMultiplier;
 
         mainCam.fieldOfView = initialFOV * speedMultiplier;

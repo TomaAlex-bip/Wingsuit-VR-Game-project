@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "c5e6bf0c",
         "name": "com.DefaultCompany.WingsuitVRGame",
-        "processId": 20614,
+        "processId": 24575,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -48,6 +48,18 @@
             "deviceId": "c5e6bf0c",
             "name": "com.DefaultCompany.WingsuitVRGame",
             "processId": 20614,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 24232,
+            "exited": false
+        },
+        {
+            "deviceId": "c5e6bf0c",
+            "name": "com.DefaultCompany.WingsuitVRGame",
+            "processId": 24575,
             "exited": false
         }
     ],
