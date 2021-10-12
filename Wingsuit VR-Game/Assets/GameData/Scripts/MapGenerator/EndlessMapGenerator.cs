@@ -6,7 +6,8 @@ public class EndlessMapGenerator : MonoBehaviour
 {
     public static EndlessMapGenerator Instance { get; private set; }
 
-
+    public Material wallsMaterial;
+ 
     [SerializeField] private Transform player;
 
     [SerializeField] private GameObject scorePoint;
@@ -23,7 +24,7 @@ public class EndlessMapGenerator : MonoBehaviour
     [SerializeField] private ChunkGenerator chunkGenerator;
 
 
-    Dictionary<int, GameObject> visibleChunks = new Dictionary<int, GameObject>();
+    public readonly Dictionary<int, GameObject> VisibleChunks = new Dictionary<int, GameObject>();
 
     float playerPositionZ;
     float oldPlayerPositionZ;
@@ -52,6 +53,8 @@ public class EndlessMapGenerator : MonoBehaviour
             chunkGenerator.NoiseSettings.seed = Random.Range(int.MinValue, int.MaxValue);
         }
         
+        wallsMaterial.color = new Color(1f, 1f, 1f, 0f);
+
     }
 
     private void Update()
@@ -78,23 +81,24 @@ public class EndlessMapGenerator : MonoBehaviour
         {
             int inRangeChunkCoord = currentChunkCoord + offset;
 
-            if(!visibleChunks.ContainsKey(inRangeChunkCoord) && inRangeChunkCoord >= chunkStartOffset)
+            if(!VisibleChunks.ContainsKey(inRangeChunkCoord) && inRangeChunkCoord >= chunkStartOffset)
             {
                 var chunkToSpawn = chunkGenerator.GenerateChunk(inRangeChunkCoord);
                 var instChunk = Instantiate(chunkToSpawn, transform);
                 instChunk.transform.localPosition = new Vector3(0f, 0f, inRangeChunkCoord * chunkSize);
-                visibleChunks[inRangeChunkCoord] = instChunk;
+                VisibleChunks[inRangeChunkCoord] = instChunk;
 
                 var spawnPointsTransform = instChunk.transform.Find("SpawnPointsForScorePoints");
                 if (spawnPointsTransform != null)
                 {
                     var spawnPoints = spawnPointsTransform.GetComponentsInChildren<Transform>();
-                    foreach (var point in spawnPoints)
+
+                    for (int i = 1; i < spawnPoints.Length; i++)
                     {
                         var rng = Random.Range(0f, 1f);
                         if (rng <= spawnChance)
                         {
-                            Instantiate(scorePoint, point.transform.position, Quaternion.identity);
+                            Instantiate(scorePoint, spawnPoints[i].transform);
                         }
                     }
                 }
@@ -112,7 +116,7 @@ public class EndlessMapGenerator : MonoBehaviour
         // checks if we have some chunks left behind and destroy them
 
         List<int> leftBehindChunksKeys = new List<int>(); 
-        foreach (var chunk in visibleChunks)
+        foreach (var chunk in VisibleChunks)
         {
             if (chunk.Key < currentChunkCoord - chunksVisibleBack)
             {
@@ -124,7 +128,7 @@ public class EndlessMapGenerator : MonoBehaviour
 
         foreach(int key in leftBehindChunksKeys)
         {
-            visibleChunks.Remove(key);
+            VisibleChunks.Remove(key);
         }
 
         leftBehindChunksKeys.Clear();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float movementSpeed;
 
+    [SerializeField] private GameObject speedParticles;
+    
     [SerializeField] private Vector2 minContraints;
     [SerializeField] private Vector2 maxContraints;
 
@@ -16,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotX;
     [SerializeField] private float rotY;
 
+    
     private PlayerBehaviour playerBehaviour;
     private GameManager gameManager;
 
@@ -43,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        
         cam = transform.Find("Main Camera");
         speed = movementSpeed;
         playerBehaviour = PlayerBehaviour.Instance;
@@ -50,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         
         mainCam = cam.GetComponent<Camera>();
         initialFOV = mainCam.fieldOfView;
+        
 
     }
 
@@ -65,8 +71,35 @@ public class PlayerMovement : MonoBehaviour
         var x = Mathf.Clamp(localPosition.x, minContraints.x, maxContraints.x);
         var y = Mathf.Clamp(localPosition.y, minContraints.y, maxContraints.y);
 
+        // var listOfVisibleChunks = EndlessMapGenerator.Instance.VisibleChunks.Values;
+        // foreach (var chunk in listOfVisibleChunks)
+        // {
+        //     var wallsParent = chunk.transform.Find("Walls");
+        //     //var wallsRend = new List<Renderer>();
+        //     for (int i = 0; i < 4; i++)
+        //     {
+        //         var wallRend = wallsParent.GetChild(i).GetComponent<Renderer>();
+        //         var currentColor = wallRend.material.color;
+        //         currentColor.a = 1f;
+        //         wallRend.sharedMaterial.color = currentColor;
+        //     }
+        //     
+        //     
+        // }
+
+        var position = transform.localPosition;
+
+
+        var xDist = maxContraints.x - Mathf.Abs(x);
+
+        var yMed = (maxContraints.y + minContraints.y) / 2f;
+        var yDist = maxContraints.y - yMed - (y-yMed);
+
+        var distanceFromWalls = Mathf.Min(xDist, yDist);
+
+        var alfaMat = 1f - Mathf.InverseLerp(0f, 4.25f, distanceFromWalls);
         
-        
+        EndlessMapGenerator.Instance.wallsMaterial.color = new Color(1f, 0f, 0f, alfaMat);
         
         transform.localPosition = new Vector3(x, y, localPosition.z);
 
@@ -129,6 +162,8 @@ public class PlayerMovement : MonoBehaviour
         var restartRotation = restart.transform.rotation;
         var rot = Quaternion.Euler(110f, restartRotation.y, restartRotation.z);
         restart.transform.rotation = rot;
+        
+        speedParticles.SetActive(false);
     }
 
     public void GameOverState()
@@ -137,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
         //speed = 0f;
         playerBehaviour.GameOverState();
         playerMovement.enabled = false;
+        
+        speedParticles.SetActive(false);
     }
 
     private void ContinueState()
@@ -144,10 +181,22 @@ public class PlayerMovement : MonoBehaviour
         inSettings = false;
         var restart = gameManager.UI.restartButton;
         restart.SetActive(false);
-        speedMultiplier = 1f + (rotX/2f) / 100f;
+        speedMultiplier = 1f + (rotX/1.25f) / 100f;
         speed = movementSpeed * speedMultiplier;
 
         mainCam.fieldOfView = initialFOV * speedMultiplier;
+
+        if (speedMultiplier > 1f)
+        {
+            speedParticles.SetActive(true);
+        }
+        else
+        {
+            speedParticles.SetActive(false);
+        }
+        
+    
+        
 
     }
 
