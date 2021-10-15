@@ -6079,13 +6079,12 @@ MonoBehaviour:
     greenBiomes: 0
     blueBiomes: 0
     noiseSettings:
-      scale: 27.7
+      scale: 7.14
       amplitude: 3
       randomSeed: 1
       seed: 0
     biomes:
     - chunks:
-      - {fileID: 5924135610357840197, guid: ff6386f0613a28545852fc0f53c73191, type: 3}
       - {fileID: 5924135610357840197, guid: 3bfc6f7cbe65a21498dc1a416599dc09, type: 3}
       - {fileID: 5924135610357840197, guid: b05f98dbee34d1d45bd22801898ab525, type: 3}
       - {fileID: 5924135610357840197, guid: ca44a8325cc67c04da11430168561cbc, type: 3}
@@ -6094,7 +6093,17 @@ MonoBehaviour:
       - {fileID: 5924135610357840197, guid: 780df6d2a30a4164aa39da88b167b4f5, type: 3}
       - {fileID: 5924135610357840197, guid: b7908e0514b420747843d1804d4c14ec, type: 3}
       - {fileID: 5924135610357840197, guid: 47dd2e5ea08709746ac9bf00ab297881, type: 3}
+      - {fileID: 5924135610357840197, guid: ff6386f0613a28545852fc0f53c73191, type: 3}
       minValue: 0
+      maxValue: 0.3
+    - chunks:
+      - {fileID: 5924135610357840197, guid: cc197ef60157c6947a7a8366e34bd063, type: 3}
+      - {fileID: 5924135610357840197, guid: 8f3429b6dc85cb642866555a4b67398f, type: 3}
+      - {fileID: 5924135610357840197, guid: 0385b14c485e77240b19802477b6d36d, type: 3}
+      - {fileID: 5924135610357840197, guid: bc81f02cc29e69f4abe89a5338270932, type: 3}
+      - {fileID: 5924135610357840197, guid: 23a7ad0590824a143a7a0a8de7033bc1, type: 3}
+      - {fileID: 5924135610357840197, guid: e1782ecf5fad872418a52c3d944c7e38, type: 3}
+      minValue: 0.3
       maxValue: 1
 --- !u!1001 &2029142801
 PrefabInstance:
