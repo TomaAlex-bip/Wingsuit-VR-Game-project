@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed;
 
     [SerializeField] private GameObject speedParticles;
+    [SerializeField] private float speedParticlesDefaultEmisionRate = 200f;
     
     [SerializeField] private Vector2 minContraints;
     [SerializeField] private Vector2 maxContraints;
@@ -29,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Camera mainCam;
     private float initialFOV;
+
+    private ParticleSystem speedParticleSystem;
 
     private bool inSettings = false;
 
@@ -55,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
         
         mainCam = cam.GetComponent<Camera>();
         initialFOV = mainCam.fieldOfView;
-        
 
+        speedParticleSystem = speedParticles.GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -186,9 +189,15 @@ public class PlayerMovement : MonoBehaviour
 
         mainCam.fieldOfView = initialFOV * speedMultiplier;
 
-        if (speedMultiplier > 1f)
+        if (speedMultiplier > 0.9f)
         {
             speedParticles.SetActive(true);
+
+            var newEmmiter = speedParticleSystem.emission;
+
+            newEmmiter.rateOverTime = speedParticlesDefaultEmisionRate * speedMultiplier * speedMultiplier ;
+
+
         }
         else
         {

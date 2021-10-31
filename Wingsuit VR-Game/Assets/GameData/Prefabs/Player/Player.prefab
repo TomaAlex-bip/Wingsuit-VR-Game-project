@@ -324,8 +324,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 20
-  minContraints: {x: -4.5, y: -6}
-  maxContraints: {x: 4.5, y: 5}
+  speedParticles: {fileID: 0}
+  speedParticlesDefaultEmisionRate: 200
+  minContraints: {x: -4.5, y: -5.5}
+  maxContraints: {x: 4.5, y: 3}
   limitRotation: 1
   maxRotation: 60
   rotX: 0
@@ -342,6 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9be91c7ec9a94b46a4c2f07a3b13622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreParticle: {fileID: 2528355902161998749, guid: 46364c9c6d4c0554c84956f75a0d71eb,
+    type: 3}
 --- !u!135 &633006889
 SphereCollider:
   m_ObjectHideFlags: 0

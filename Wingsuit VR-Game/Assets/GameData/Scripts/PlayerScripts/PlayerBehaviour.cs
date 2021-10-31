@@ -9,6 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
     public static PlayerBehaviour Instance { get; private set; }
 
     [SerializeField] private GameObject scoreParticle;
+    [SerializeField] private GameObject playerExplosionParticle;
 
 
     private GameManager gameManager;
@@ -58,7 +59,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         rb.AddForce(transform.forward * 5000f);
 
-        gameManager.RestartGame(3f);
+        gameManager.RestartGame(5f);
         
     
     }
@@ -69,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             case "Respawn":
                 PlayerMovement.Instance.GameOverState();
+                Instantiate(playerExplosionParticle, collision.GetContact(0).point, Quaternion.identity);
                 break;
             
             
